@@ -1,0 +1,24 @@
+div {
+  margin-top: 10px;
+}
+.stay {
+  position: absolute;
+}
+
+.example-enter {
+  top:40px;
+}
+
+.example-enter.example-enter-active {
+  top: 0;
+  transition: all 500ms ease-in;
+}
+
+.example-leave {
+  top: 0;
+}
+
+.example-leave.example-leave-active {
+  top: -10px;
+  transition: all 500ms ease-in;
+}
