@@ -1,11 +1,18 @@
 const createState = date => ({time: `${date.getMinutes()}:${date.getSeconds()}`});
 
 // REDUX
-const updateTimeAction = {type: 'UPDATE_TIME'};
-const reducer = (state = createState(new Date()), action) => {
+const createTimeAction = () => ({
+  type: 'UPDATE_TIME',
+  payload: {
+    date: new Date()
+  }
+});
+
+const initialState = createState(new Date());
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_TIME':
-      return createState(new Date());
+      return Object.assign({}, state, createState(action.payload.date));
     default:
       return state;
   }
@@ -26,7 +33,7 @@ const App = ReactRedux.connect(s => s)(
   }, React.createElement(Child, {key: props.time}))
 );
 
-const interval = setInterval(() => store.dispatch(updateTimeAction), 2000);
+const interval = setInterval(() => store.dispatch(createTimeAction()), 2000);
 
 ReactDOM.render(
   React.createElement(ReactRedux.Provider, {store}, React.createElement(App)),
